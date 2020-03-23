@@ -1,10 +1,16 @@
-import {api} from 'api.js';
+// import {api} from 'api.js';
 
 var inquirer = require("inquirer");
 var fs = require('fs');
+const axios = require('axios');
 
 inquirer
   .prompt([
+    {
+      type: "input",
+      message: "What is your Github username?",
+      name: "username"
+    },
     {
       type: "input",
       message: "What is the title of your project?",
@@ -43,14 +49,26 @@ inquirer
     ])
 
     .then(function(response) {
-
+        var unameInput = response.username;
         var title = response.title;
         var description = response.description;
         var install = response.install;
         var usage = response.usage;
         var license = response.license;
         var contributors = response.contributors;
-        var tests = response.tests;
+        var tests = response.tests;    
+
+      axios({
+          method: 'get',
+          url: `https://api.github.com/users/${unameInput}`,
+        })
+          .then(function(response) {
+          var username = response.data.login;
+          var profImgUrl = response.data.avatar_url;
+          console.log(username);
+          console.log(profImgUrl);
+        
+
 
         const script = `${title}
                 ${description}
@@ -58,7 +76,9 @@ inquirer
                 ${usage}
                 ${license}
                 ${contributors}
-                ${tests}`
+                ${tests}
+                ${username}
+                ${profImgUrl}`
 
         fs.writeFile("README.md", script, function(err) {
               
@@ -69,7 +89,7 @@ inquirer
                     console.log('README.md file successfully created!');
                       
         });
-
+      });
     }
     
 );
