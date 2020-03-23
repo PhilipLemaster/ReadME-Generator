@@ -46,12 +46,12 @@ inquirer
       },
       {
         type: "input",
-        message: "What badge label would you like to use? (ie. date created, license, version, etc.)",
+        message: "What badge label would you like to use? Use '%20' instead of spacebar if using multiple words.",
         name: "badgeLabel"
       },
       {
         type: "input",
-        message: "What badge message would you like to use?",
+        message: "What badge message would you like to use? Use '%20' instead of spacebar if using multiple words.",
         name: "badgeMsg"
       },
       {
