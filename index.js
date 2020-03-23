@@ -43,6 +43,22 @@ inquirer
         type: "input",
         message: "What tests, if any, does this project feature?",
         name: "tests"
+      },
+      {
+        type: "input",
+        message: "What badge label would you like to use? (ie. date created, license, version, etc.)",
+        name: "badgeLabel"
+      },
+      {
+        type: "input",
+        message: "What badge message would you like to use?",
+        name: "badgeMsg"
+      },
+      {
+        type: "list",
+        message: "What badge color would you like to use?",
+        name: "badgeColor",
+        choices: ["brightgreen", "green", "yellowgreen", "yellow", "orange", "red", "lightgrey", "blue"]
       }
     ])
 
@@ -54,7 +70,11 @@ inquirer
         var usage = response.usage;
         var license = response.license;
         var contributors = response.contributors;
-        var tests = response.tests;    
+        var tests = response.tests;   
+        var badgeLabel = response.badgeLabel;
+        var badgeMsg = response.badgeMsg;
+        var badgeColor = response.badgeColor;
+        var badgeUrl = `https://img.shields.io/badge/${badgeLabel}-${badgeMsg}-${badgeColor}`;
 
       axios({
           method: 'get',
@@ -68,7 +88,8 @@ inquirer
         
 
 
-        const script = ` # ${title}
+        const script = ` ![badge image](${badgeUrl} "Project Badge")
+# ${title}
 ***
 ## Description
 ${description}
