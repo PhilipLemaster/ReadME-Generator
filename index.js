@@ -1,5 +1,3 @@
-// import {api} from 'api.js';
-
 var inquirer = require("inquirer");
 var fs = require('fs');
 const axios = require('axios');
@@ -63,22 +61,45 @@ inquirer
           url: `https://api.github.com/users/${unameInput}`,
         })
           .then(function(response) {
-          var username = response.data.login;
+          var email = response.data.email;
           var profImgUrl = response.data.avatar_url;
-          console.log(username);
+          console.log(email);
           console.log(profImgUrl);
         
 
 
-        const script = `${title}
-                ${description}
-                ${install}
-                ${usage}
-                ${license}
-                ${contributors}
-                ${tests}
-                ${username}
-                ${profImgUrl}`
+        const script = ` # ${title}
+***
+## Description
+${description}
+***
+## Table of Contents
+- Installation
+- Usage
+- Licensing Info
+- Contributors
+- Tests
+- Creator Info
+***
+## Installation Requirements
+${install}
+***
+## Usage
+${usage}
+***
+## Licensing Info
+${license}
+***
+## Contributors
+${contributors}
+***
+## Tests
+${tests}
+***
+## Github Creator Info
+![profile image](${profImgUrl} "Logo Title Text 1")
+${email}`
+        
 
         fs.writeFile("README.md", script, function(err) {
               
