@@ -83,8 +83,6 @@ inquirer
           .then(function(response) {
           var email = response.data.email;
           var profImgUrl = response.data.avatar_url;
-          console.log(email);
-          console.log(profImgUrl);
         
 
 
@@ -135,14 +133,3 @@ ${email}`
     }
     
 );
-
-
-
-
-
-
-function init() {
-    
-}
-
-init();
