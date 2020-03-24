@@ -36,8 +36,8 @@ inquirer
       },
       {
         type: "input",
-        message: "Who has contributed to this project?",
-        name: "contributors"
+        message: "What contributions will be considered for this project?",
+        name: "contributions"
       },
       {
         type: "input",
@@ -46,12 +46,12 @@ inquirer
       },
       {
         type: "input",
-        message: "What badge label would you like to use? Use '%20' instead of spacebar if using multiple words.",
+        message: "What badge label would you like to use?",
         name: "badgeLabel"
       },
       {
         type: "input",
-        message: "What badge message would you like to use? Use '%20' instead of spacebar if using multiple words.",
+        message: "What badge message would you like to use?",
         name: "badgeMsg"
       },
       {
@@ -69,10 +69,10 @@ inquirer
         var install = response.install;
         var usage = response.usage;
         var license = response.license;
-        var contributors = response.contributors;
+        var contributions = response.contributions;
         var tests = response.tests;   
-        var badgeLabel = response.badgeLabel;
-        var badgeMsg = response.badgeMsg;
+        var badgeLabel = encodeURIComponent(response.badgeLabel);
+        var badgeMsg = encodeURIComponent(response.badgeMsg);
         var badgeColor = response.badgeColor;
         var badgeUrl = `https://img.shields.io/badge/${badgeLabel}-${badgeMsg}-${badgeColor}`;
 
@@ -98,7 +98,7 @@ ${description}
 - Installation
 - Usage
 - Licensing Info
-- Contributors
+- Contributions
 - Tests
 - Creator Info
 ***
@@ -111,8 +111,8 @@ ${usage}
 ## Licensing Info
 ${license}
 ***
-## Contributors
-${contributors}
+## Contributions
+${contributions}
 ***
 ## Tests
 ${tests}
